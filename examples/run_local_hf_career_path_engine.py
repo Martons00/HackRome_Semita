@@ -3,6 +3,8 @@ import os
 
 from career_path_engine import (
     DEFAULT_LOCAL_MODEL,
+    EscoApiClient,
+    EscoRoleSkillRetriever,
     LocalHuggingFaceCareerPathEngine,
     UserProfile,
 )
@@ -55,28 +57,17 @@ Also has SDR experience at Factorial, so communication and business exposure are
 )
 
 
-def static_retriever(query: str):
-    return [
-        """
-Computer vision roles usually require Python, PyTorch or TensorFlow, image preprocessing,
-model evaluation, transfer learning, experiment tracking, Git, and communication with product
-or research stakeholders. Medical AI roles often add DICOM/NIfTI familiarity, privacy-aware
-data handling, careful validation, bias checks, documentation, and explainability.
-""",
-        """
-Junior candidates are stronger when they show one or two end-to-end portfolio projects:
-dataset exploration, baseline model, improved model, metrics, error analysis, reproducible
-README, and a short technical write-up. For healthcare AI, public datasets such as MedMNIST,
-ISIC, CheXpert, or BraTS-style tasks are common learning references.
-""",
-    ]
-
-
 def main():
     model_id = os.getenv("HF_MODEL_ID", DEFAULT_LOCAL_MODEL)
+    esco_language = os.getenv("ESCO_LANGUAGE", "en")
+    retriever = EscoRoleSkillRetriever(
+        client=EscoApiClient(language=esco_language),
+        occupation_limit=3,
+        skill_limit=8,
+    )
     engine = LocalHuggingFaceCareerPathEngine(
         model_id=model_id,
-        retriever=static_retriever,
+        retriever=retriever,
         max_new_tokens=1800,
     )
     output = engine.invoke(example_user)

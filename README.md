@@ -16,6 +16,8 @@ Il modello di default e' `Qwen/Qwen2.5-1.5B-Instruct`, abbastanza piccolo per gi
 python examples/run_local_hf_career_path_engine.py
 ```
 
+L'esempio usa le ESCO REST API per cercare occupazioni e skill correlate al ruolo target, poi passa quel contesto al modello locale Hugging Face.
+
 Per provare un modello un po' piu' forte, ma piu' lento:
 
 ```bash
@@ -28,9 +30,25 @@ Il motore restituisce sempre un oggetto `CareerPathOutput` validato con Pydantic
 
 - `career_path_engine/schemas.py`: modelli `UserProfile` e `CareerPathOutput`.
 - `career_path_engine/prompts.py`: prompt principale e istruzioni operative dell'agente.
+- `career_path_engine/esco.py`: client ESCO REST API e retriever per definizione dei ruoli/skill.
 - `career_path_engine/local_hf.py`: engine locale Hugging Face con parsing e validazione JSON.
 - `career_path_engine/chain.py`: factory opzionale per usare una chain LangChain con modelli compatibili.
 - `examples/run_local_hf_career_path_engine.py`: esempio basato sul notebook iniziale.
+
+## ESCO REST API
+
+Il retriever chiama:
+
+- `/search` con `type=occupation` per derivare ruoli simili al target.
+- `/search` con `type=skill` per trovare skill correlate.
+- `/resource/occupation?uri=...` per recuperare il dettaglio del ruolo.
+- `/resource/skill?uri=...` per recuperare il dettaglio della skill.
+
+La lingua di default e' inglese. Puoi cambiarla cosi':
+
+```bash
+ESCO_LANGUAGE=it python examples/run_local_hf_career_path_engine.py
+```
 
 ## Note pratiche
 
