@@ -15,6 +15,9 @@
   <a href="https://github.com/Martons00/HackRome_Semita">
     <img src="https://img.shields.io/badge/GitHub-Repository-181717?logo=github" alt="GitHub repository">
   </a>
+  <a href="https://sienna-duck-439116.hostingersite.com">
+    <img src="https://img.shields.io/badge/WebApp-Live%20Demo-00A67E" alt="Live web app demo">
+  </a>
   <img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white" alt="Python 3.10+">
   <img src="https://img.shields.io/badge/Hugging%20Face-Qwen2.5--1.5B-FFD21E?logo=huggingface&logoColor=black" alt="Hugging Face Qwen model">
   <img src="https://img.shields.io/badge/ESCO-REST%20API-0052CC" alt="ESCO REST API">
@@ -39,9 +42,14 @@ Use the Colab notebook as the fastest way to test the project.
   <a href="https://colab.research.google.com/drive/1t9a4gy8UPhOLFM9CoRpOT12dxsjsVoUo?usp=sharing">
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Colab">
   </a>
+  <a href="https://sienna-duck-439116.hostingersite.com">
+    <img src="https://img.shields.io/badge/Open-WebApp-00A67E" alt="Open WebApp">
+  </a>
 </p>
 
-You can also upload `SemitaTestCareerEngine.ipynb` manually to Google Colab.
+You can also upload `SemitaTestCareerEngine.ipynb` manually to Google Colab, or try the hosted WebApp:
+
+[Open the live WebApp](https://sienna-duck-439116.hostingersite.com)
 
 <table>
   <tr>
@@ -54,7 +62,9 @@ You can also upload `SemitaTestCareerEngine.ipynb` manually to Google Colab.
       <strong>GitHub repository</strong>
     </td>
     <td align="center">
-      <img src="img/sitoWebDemoQR_Code.png" alt="Website demo QR code" width="180"><br>
+      <a href="https://sienna-duck-439116.hostingersite.com">
+        <img src="img/sitoWebDemoQR_Code.png" alt="Website demo QR code" width="180">
+      </a><br>
       <strong>Website demo</strong>
     </td>
   </tr>
