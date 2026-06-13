@@ -24,6 +24,14 @@ python examples/run_local_hf_career_path_engine.py
 
 L'esempio usa le ESCO REST API per cercare occupazioni e skill correlate al ruolo target, poi passa quel contesto al modello locale Hugging Face.
 
+## Demo Google Colab
+
+Puoi usare il notebook `SemitaTestCareerEngine.ipynb` come demo caricandolo manualmente su Google Colab.
+
+In alternativa, puoi aprire direttamente questa demo gia' caricata:
+
+[Apri la demo su Google Colab](https://colab.research.google.com/drive/1t9a4gy8UPhOLFM9CoRpOT12dxsjsVoUo?usp=sharing)
+
 Per provare un modello un po' piu' forte, ma piu' lento:
 
 ```bash
