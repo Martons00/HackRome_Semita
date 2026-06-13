@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "semitaai-career-path-engine"
+version = "0.1.0"
+description = "Local Hugging Face career path engine with ESCO role and skill retrieval."
+requires-python = ">=3.10"
+dependencies = [
+    "pydantic>=2.0.0",
+    "requests>=2.32.0",
+    "transformers>=4.45.0",
+    "torch>=2.3.0",
+    "accelerate>=0.33.0",
+    "langchain>=0.2.0",
+]
+
+[tool.setuptools.packages.find]
+include = ["career_path_engine*"]

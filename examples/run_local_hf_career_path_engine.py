@@ -1,11 +1,14 @@
 import json
 import os
+import sys
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
 from career_path_engine import (
     DEFAULT_LOCAL_MODEL,
-    EscoApiClient,
-    EscoRoleSkillRetriever,
-    LocalHuggingFaceCareerPathEngine,
     UserProfile,
 )
 
@@ -58,6 +61,12 @@ Also has SDR experience at Factorial, so communication and business exposure are
 
 
 def main():
+    from career_path_engine import (
+        EscoApiClient,
+        EscoRoleSkillRetriever,
+        LocalHuggingFaceCareerPathEngine,
+    )
+
     model_id = os.getenv("HF_MODEL_ID", DEFAULT_LOCAL_MODEL)
     esco_language = os.getenv("ESCO_LANGUAGE", "en")
     retriever = EscoRoleSkillRetriever(

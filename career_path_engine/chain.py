@@ -1,40 +1,11 @@
-from collections.abc import Callable, Sequence
 from typing import Any, Optional
 
-from langchain_core.documents import Document
 from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_core.prompts import ChatPromptTemplate
 
 from .prompts import CAREER_PATH_ENGINE_SYSTEM_PROMPT, CAREER_PATH_ENGINE_USER_PROMPT
+from .retrieval import RetrieverFn, build_retrieval_query, format_retrieved_context
 from .schemas import CareerPathOutput, UserProfile
-
-RetrieverFn = Callable[[str], Sequence[Document] | Sequence[str]]
-
-
-def _format_retrieved_context(items: Sequence[Document] | Sequence[str]) -> str:
-    if not items:
-        return "No external context provided."
-
-    chunks: list[str] = []
-    for item in items:
-        if isinstance(item, Document):
-            source = item.metadata.get("source")
-            prefix = f"Source: {source}\n" if source else ""
-            chunks.append(f"{prefix}{item.page_content}")
-        else:
-            chunks.append(str(item))
-
-    return "\n\n---\n\n".join(chunks)
-
-
-def _build_retrieval_query(profile: UserProfile) -> str:
-    parts = [
-        profile.target_role,
-        profile.target_industry or "",
-        profile.location or "",
-        "required skills courses certifications job descriptions career path",
-    ]
-    return " ".join(part for part in parts if part).strip()
 
 
 def build_career_path_chain(llm: BaseChatModel):
@@ -57,8 +28,8 @@ class CareerPathEngine:
         retrieved_context = "No external context provided."
 
         if self.retriever is not None:
-            query = _build_retrieval_query(user_profile)
-            retrieved_context = _format_retrieved_context(self.retriever(query))
+            query = build_retrieval_query(user_profile)
+            retrieved_context = format_retrieved_context(self.retriever(query))
 
         return self.chain.invoke(
             {

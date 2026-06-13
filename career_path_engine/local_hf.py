@@ -7,8 +7,8 @@ import torch
 from pydantic import ValidationError
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from .chain import RetrieverFn, _build_retrieval_query, _format_retrieved_context
 from .prompts import CAREER_PATH_ENGINE_SYSTEM_PROMPT
+from .retrieval import RetrieverFn, build_retrieval_query, format_retrieved_context
 from .schemas import CareerPathOutput, UserProfile
 
 DEFAULT_LOCAL_MODEL = "Qwen/Qwen2.5-1.5B-Instruct"
@@ -63,8 +63,8 @@ class LocalHuggingFaceCareerPathEngine:
         retrieved_context = "No external context provided."
 
         if self.retriever is not None:
-            query = _build_retrieval_query(user_profile)
-            retrieved_context = _format_retrieved_context(self.retriever(query))
+            query = build_retrieval_query(user_profile)
+            retrieved_context = format_retrieved_context(self.retriever(query))
 
         prompt = self._build_prompt(user_profile, retrieved_context)
         raw_output = self._generate(prompt)

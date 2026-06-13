@@ -8,6 +8,12 @@ Questo progetto definisce una chain LangChain per generare percorsi di carriera 
 pip install -r requirements.txt
 ```
 
+Se lavori da Colab o da una cartella diversa dalla root del repo, installa anche il package in modalita' editabile:
+
+```bash
+pip install -e .
+```
+
 Il modello di default e' `Qwen/Qwen2.5-1.5B-Instruct`, abbastanza piccolo per girare localmente su Mac M1 16GB tramite PyTorch/MPS.
 
 ## Uso rapido
